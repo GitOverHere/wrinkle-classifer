@@ -7,12 +7,15 @@
         body {
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
         }
 
         header {
             background-color: #003399;
             color: white;
             padding: 10px;
+            text-align: center;
         }
 
         header h1 {
@@ -30,6 +33,62 @@
             text-decoration: none;
             padding: 5px 10px;
         }
+
+        nav a:hover {
+            background-color: #002266;
+        }
+
+        #uploadForm {
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        #uploadForm input[type="file"] {
+            display: none;
+        }
+
+        #uploadForm label {
+            background-color: #003399;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #uploadForm label:hover {
+            background-color: #002266;
+        }
+
+        #classifyButton {
+            background-color: #003399;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #classifyButton:hover {
+            background-color: #002266;
+        }
+
+        #resultDiv {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #imagePreview {
+            max-width: 100%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        #previewImage {
+            max-width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -38,13 +97,16 @@
         <nav>
             <a href="#">Home</a>
             <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="#">Settings</a>
         </nav>
     </header>
 
+    <div id="imagePreview"></div> <!-- Div to display the image preview -->
+
     <form method="post" enctype="multipart/form-data" id="uploadForm">
-        <input type="file" name="image" accept="image/*" required>
-        <input type="submit" value="Upload and Classify">
+        <label for="image">Upload Image</label>
+        <input type="file" name="image" id="image" accept="image/*" required>
+        <input type="submit" value="Classify" id="classifyButton">
     </form>
     <div id="resultDiv"></div>
 
@@ -65,6 +127,22 @@
                 document.getElementById('resultDiv').innerText = result;
             })
             .catch(error => console.error('Error:', error));
+        });
+
+        // Function to display the image preview
+        document.getElementById('image').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                var img = document.createElement('img');
+                img.src = reader.result;
+                img.id = 'previewImage';
+                document.getElementById('imagePreview').innerHTML = '';
+                document.getElementById('imagePreview').appendChild(img);
+            };
+            if (file) {
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 </body>
