@@ -2,9 +2,46 @@
 <html>
 <head>
     <title>Wrinkle Classifier</title>
+    <style>
+        /* Custom CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #003399;
+            color: white;
+            padding: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Wrinkle Classifier</h1>
+    <header>
+        <h1>Wrinkle Classifier</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
     <form method="post" enctype="multipart/form-data" id="uploadForm">
         <input type="file" name="image" accept="image/*" required>
         <input type="submit" value="Upload and Classify">
